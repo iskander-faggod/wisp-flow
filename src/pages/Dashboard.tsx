@@ -16,7 +16,10 @@ export const Dashboard: React.FC = () => {
   }
 
   const { monthlyIncome, yearlyIncome } = calculations;
-  const totalSavings = savings.currentSavings + savings.alreadySaved;
+
+  // Total Savings = alreadySaved + currentSavings + сумма всех monthly savings
+  const yearlySavingsTotal = yearlySavings.reduce((sum, s) => sum + s.savedAmount, 0);
+  const totalSavings = savings.currentSavings + savings.alreadySaved + yearlySavingsTotal;
 
   // Реальные накопления текущего месяца
   const realMonthlySavings = currentMonthSavings?.savedAmount || 0;
@@ -96,6 +99,12 @@ export const Dashboard: React.FC = () => {
             <span className="text-gray-600">Already Saved</span>
             <span className="text-xl font-semibold">
               {formatCurrency(savings.alreadySaved, settings.currency, settings.locale)}
+            </span>
+          </div>
+          <div className="flex justify-between items-center">
+            <span className="text-gray-600">This Year Savings</span>
+            <span className="text-xl font-semibold text-green-600">
+              {formatCurrency(yearlySavingsTotal, settings.currency, settings.locale)}
             </span>
           </div>
           <div className="border-t pt-4">
