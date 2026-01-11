@@ -5,7 +5,7 @@ import { Modal } from '@/components/ui/Modal';
 import { Input } from '@/components/ui/Input';
 import { Select } from '@/components/ui/Select';
 import { monthlyIncomeService, monthlySavingsService } from '@/db/services';
-import type { MonthlyIncome, MonthlySavings, IncomeType } from '@/types/models';
+import type { MonthlyIncome as MonthlyIncomeType, MonthlySavings, IncomeType } from '@/types/models';
 import { IncomeType as IncomeTypeEnum } from '@/types/models';
 import { Plus, Check, X, ChevronLeft, ChevronRight, PiggyBank } from 'lucide-react';
 import { formatCurrency } from '@/utils/calculations';
@@ -20,7 +20,7 @@ export const MonthlyIncome: React.FC = () => {
   const { settings } = useAppStore();
   const currentDate = new Date();
   const [selectedYear, setSelectedYear] = useState(currentDate.getFullYear());
-  const [monthlyData, setMonthlyData] = useState<Map<number, MonthlyIncome[]>>(new Map());
+  const [monthlyData, setMonthlyData] = useState<Map<number, MonthlyIncomeType[]>>(new Map());
   const [monthlySavingsData, setMonthlySavingsData] = useState<Map<number, MonthlySavings | undefined>>(new Map());
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
@@ -35,7 +35,7 @@ export const MonthlyIncome: React.FC = () => {
   }, [selectedYear]);
 
   const loadMonthlyData = async () => {
-    const data = new Map<number, MonthlyIncome[]>();
+    const data = new Map<number, MonthlyIncomeType[]>();
     const savingsData = new Map<number, MonthlySavings | undefined>();
 
     for (let month = 1; month <= 12; month++) {

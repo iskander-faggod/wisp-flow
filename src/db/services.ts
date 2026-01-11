@@ -6,8 +6,7 @@ import type {
   AppSettings,
   MonthlyIncome,
   MonthlySavings,
-  IncomeType,
-  IncomeFrequency
+  IncomeType
 } from '@/types/models';
 
 /**
